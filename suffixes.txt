@@ -1,0 +1,115 @@
+-able
+-ac
+-acity, -ocity
+-ade
+-age
+-aholic, -oholic
+-al
+-algia
+-an, -ian
+-ance
+-ant
+-ar
+-ard
+-arian
+-arium, -orium
+-ary
+-ate
+-ation
+-ative
+-cide
+-crary
+-crat
+-cule
+-cy
+-cycle
+-dom
+-dox
+-ectomy
+-ed
+-ee
+-eer
+-emia
+-en
+-ence
+-ency
+-ent
+-er
+-ern
+-ese
+-esque
+-est
+-etic
+-ette
+-ful
+-fy
+-gam, -gamy
+-gon, -gonic
+-hood
+-ial
+-ian
+-iasis
+-iatric
+-ible
+-ic, -ical
+-ile
+-ily
+-ine
+-ing
+-ion
+-ious
+-ish
+-ism
+-ist
+-ite
+-itis
+-ity
+-ive
+-ize
+-less
+-let
+-like
+-ling
+-loger, -logist
+-log
+-logy
+-ly
+-ment
+-ness
+-oid
+-oma
+-onym
+-opia
+-opsy
+-or
+-ory
+-osis
+-ostomy, -otomy
+-ous
+-path
+-pathy
+-phile
+-phobia
+-phone
+-phyte
+-plegia
+-plegic
+-pnea
+-scopy, -scope
+-scribe, -script
+-sect
+-ship
+-some
+-sophy, -sophic
+-th
+-tomy, -tome
+-trophy
+-tude
+-ty
+-ular
+-uous
+-ure
+-ward
+-ware
+-wise
+-y
