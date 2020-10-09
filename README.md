@@ -1,11 +1,5 @@
-# Test root finder API
+# Word root finder browser instruction
 
-run:
+Run: python flask.py
 
-uvicorn root_finder_api:app --reload --host 0.0.0.0 --port 8000
-
-
-
-Open browser, go to:
-
-host:8000/docs/
+Follow the instruction
