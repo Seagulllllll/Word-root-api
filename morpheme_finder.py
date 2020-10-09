@@ -21,8 +21,12 @@ Files required:
 """
 import json
 import re
+
 with open("morphemes.probability.json", "r", encoding = "utf-8") as file:
     p_root_dict = json.load(file)
+    
+with open("words.probability.json", "r", encoding = "utf-8") as file:
+    p_word_dict = json.load(file)
     
 #some rules for combining suffixes
 with open("combination.rule.json", "r", encoding = "utf-8") as file:
@@ -145,7 +149,7 @@ def Restore_forms(first, rem):
         if affix == rem:
             if len(first) >= 2:
             #consider y and er
-                if affix == "y" or affix == "er":
+                if affix == "y" or affix == "er" or affix == "ing":
                     for l in com_rule[affix]:
                         #處理y或er前面重複字母的問題
                         if l[0] != "" and l[1] == "":
@@ -203,7 +207,10 @@ def Probability(segment_combination):
                     prob = p_root_dict[seg]*10
                 else: prob = p_root_dict[seg]
             else: prob = p_root_dict[seg]
-            
+        elif re.search("[a|e|i|o|u]", seg) == None:
+            prob = 0
+        elif len(seg) <= 5 and seg in p_word_dict:
+            prob = p_word_dict[seg]
         else:
             prob = P_long_word(seg)
         prob_product *= prob
@@ -237,8 +244,10 @@ def Prob_position(segment_combination):
                 else: prob = p_root_dict[seg]
             else: prob = p_root_dict[seg]
         else:
-            if len(seg) == 1:
+            if len(seg) == 1 or re.search("[a|e|i|o|u]", seg) == None:
                 prob = 0
+            elif len(seg) <= 5 and seg in p_word_dict:
+                prob = p_word_dict[seg]
             else: prob = P_long_word(seg)
 
         #consider the position of suffixes and prefixes

@@ -60,6 +60,7 @@ def Stemming(word):
 
     """
     prefix_segment_first = Find_prefix(word)
+    #print(prefix_segment_first)
     if prefix_segment_first[0] == "":
         prefix = []
     elif len(prefix_segment_first[1]) <= 3:
@@ -75,19 +76,21 @@ def Stemming(word):
             break
         '''
         segmentation = Find_suffix(word)
+        print(segmentation)
         new_word = segmentation[0]
         if new_word == word:
             whole_segmentation = [segmentation[0]] + whole_segmentation
             break
-        if new_word in prefix_list or re.search("[a|e|i|o|u]", new_word) == False:
+        elif new_word in prefix_list or re.search("[a|e|i|o|u]", new_word) == None:
             whole_segmentation = [word] + whole_segmentation
             break
-        if len(new_word) <= 5:
+        elif len(new_word) <= 5:
             whole_segmentation = segmentation + whole_segmentation
             break
         whole_segmentation = [segmentation[1]] + whole_segmentation
         word = new_word
     prefix_segment = Find_prefix(whole_segmentation[0])
+    #print(prefix_segment)
     if prefix_segment[1] == whole_segmentation[0]:
         stem = whole_segmentation[0]
         whole_segmentation = prefix + whole_segmentation
@@ -126,7 +129,7 @@ def Find_suffix(word):
             
     result_list = []
     for can in candidates:
-        if Is_word(can[0]):
+        if Is_word(can[0]) and re.search("[a|e|i|o|u]", can[0]):
             result_list.append(can)
     if len(result_list) == 0:
         output = [word, ""]
@@ -225,7 +228,7 @@ def Restore_forms(first, rem):
         if affix == rem:
             if len(first) >= 2:
             #consider y and er
-                if affix == "y" or affix == "er":
+                if affix == "y" or affix == "er" or affix == "ing":
                     for l in com_rule[affix]:
                         #處理y或er前面重複字母的問題
                         if l[0] != "" and l[1] == "":
