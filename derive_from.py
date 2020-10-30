@@ -76,7 +76,7 @@ def Stemming(word):
             break
         '''
         segmentation = Find_suffix(word)
-        print(segmentation)
+        #print(segmentation)
         new_word = segmentation[0]
         if new_word == word:
             whole_segmentation = [segmentation[0]] + whole_segmentation
