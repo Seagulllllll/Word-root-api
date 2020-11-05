@@ -11,6 +11,17 @@ output:
 sample:
     input: morphological
     output: ['morph', 'ology', 'ic', 'al']
+    
+files required:
+    morpheme_finder.py
+    derive_from.py
+    suffixes.txt
+    prefixes.txt
+    conbination.rules.json
+    morphemes.probability.json
+    combination.rule.json
+    suffixes.txt
+    prefixes.txt
 """
 
 from morpheme_finder import Morpheme
@@ -28,10 +39,11 @@ def Segmentation(word):
                 root_segmentation.append(morpheme)
         else: root_segmentation.append(s)
     return root_segmentation
+
 if __name__ == "__main__":
     word = "morphological"
     stemming_list = Stemming(word)
-    print(stemming_list)
+    #print(stemming_list)
     stem = stemming_list[0]
     morpheme_list = Segmentation(word)
     print(morpheme_list)

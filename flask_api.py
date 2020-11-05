@@ -5,72 +5,52 @@ Created on Wed Oct  7 17:26:04 2020
 @author: user
 """
 
-from flask import Flask, request
+from flask import Flask, request, render_template
 
 from morpheme_finder import Morpheme
-from derive_from import Stemming
+from PyDictionary import PyDictionary
+from morpheme_meaning import Morpheme_meaning #Morpheme_meaning(seg_list, seg)
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
-
-def Stem(word):
-    stemming_list = Stemming(word)
-    return stemming_list[0]
+dic = PyDictionary()
 
 def Segmentation(word):
-    stemming_list = Stemming(word)
-    stem = stemming_list[0]
-    first_segmentation = stemming_list[1]
-    morpheme_list_for_stem = Morpheme(stem)
-    root_segmentation = []
-    for s in first_segmentation:
-        if s == stem:
-            for morpheme in morpheme_list_for_stem:
-                root_segmentation.append(morpheme)
-        else: root_segmentation.append(s)
-    ans = ""
-    for r in root_segmentation:
-        ans += r+" "
-    return ans
+    morpheme_list = Morpheme(word)
+    return morpheme_list
 
-
+def Part_of_speech(word):
+    dic_meaning = dic.meaning(word)
+    if dic_meaning:
+        part_of_speech = list(dic_meaning.keys())[0].lower()
+    else: return "No result."
+    return part_of_speech
+    
+def Word_meaning(word):
+    dic_meaning = dic.meaning(word)
+    if dic_meaning:
+        part_of_speech = list(dic_meaning.keys())[0]
+        meaning = dic_meaning[part_of_speech][0]
+    else: return "No result."
+    return meaning
+    
 @app.route("/", methods=["GET", "POST"])
 def home():
-    errors = ""
     if request.method == "POST":
-        word = None
-        try:
-            word = str(request.form["word"])
-        except:
-            errors += "<p>{!r} is not a word.</p>\n".format(request.form["word"])
-        if word is not None:
-            stem = Stem(word)
-            segmentation = Segmentation(word)
-            return '''
-                <html>
-                    <body>
-                        <p>The stem of the word is: {stem}</p>
-                        <p>The word is segmented as: {segmentation}</p>
-                        <p>Enter your word:</p>
-                        <form method="post" action=".">
-                            <p><input name="word" /></p>
-                            <p><input type="submit" value="Find Root!" /></p>
-                        </form>
-                    </body>
-                </html>
-            '''.format(stem = stem, segmentation = segmentation)
-
-    return '''
-        <html>
-            <body>
-                {errors}
-                <p>Enter your word:</p>
-                <form method="post" action=".">
-                    <p><input name="word" /></p>
-                    <p><input type="submit" value="Find Root!" /></p>
-                </form>
-            </body>
-        </html>
-    '''.format(errors = errors)
+        word = str(request.form["word"])
+        part_of_speech = Part_of_speech(word)
+        meaning = Word_meaning(word)+"."
+        list_items = []
+        morpheme_list = Segmentation(word)
+        for mor in morpheme_list:
+            mor_meaning = Morpheme_meaning(morpheme_list, mor)
+            list_items.append([mor, mor_meaning])
+        segmentation = Segmentation(word)
+        return render_template('index.html', word = word,
+                               part_of_speech = part_of_speech, 
+                               meaning = meaning,
+                               segmentation = segmentation, 
+                               l = list_items)
+    return render_template("index.html")
 
 app.run()

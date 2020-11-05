@@ -283,20 +283,3 @@ if __name__ == "__main__":
     word = input("Enter: ")
     result = Stemming(word)
     print(result)
-    '''
-    f = open("data.for.testing_from.eng.txt", "r", encoding = "utf-8")
-    celex = f.readlines()
-    f.close()
-    
-    content = ""
-    celex_use = [s.strip("\n").split() for s in celex]
-    word_test_list = [l[0] for l in celex_use]
-    for word in word_test_list:
-        result = Stemming(word)
-        print(result)
-
-        content += str(result) + "\n"
-    f = open("test_result4.txt", "w", encoding = "utf-8")
-    f.write(content)
-    f.close()
-    '''

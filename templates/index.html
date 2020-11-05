@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Rooter! Online dictionary for finding word roots.</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="{{url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Merriweather:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link href="{{url_for('static', filename='vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+
+  <!-- Custom styles for this template -->
+  <link href="{{url_for('static', filename='css/coming-soon.css') }}" rel="stylesheet">
+
+</head>
+
+<body>
+  <!--
+  <div class="overlay"></div>
+  <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+    <source src="mp4/bg.mp4" type="video/mp4">
+  </video>
+  -->
+  
+  <!-- Navigation -->
+  <nav class="navbar navbar-light bg-light">
+	<a class="navbar-brand px-5" href="#">Rooter!</a>
+  </nav>
+  
+  <section class="showcase">
+    <div class="container-fluid p-0">
+      <div class="row no-gutters">
+	  <div class="col-lg-5 order-lg-1 showcase-text">
+          <div class="text-black py-5 py-md-0">
+            <h1 class="mb-4">Rooter!</h1>
+            <p class="lead mb-4">Online dictionary for finding word roots.</p>
+            <form class="input-group input-group-newsletter" method="post" action=".">
+              <input id="search-bar" name="word" type="word" class="form-control ui-autocomplete-input" placeholder="Enter a word...">
+              <div class="input-group-append">
+                <button class="btn btn-secondary" type="submit" id="submit-button">Search</button>
+              </form>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-lg-6 order-lg-2 my-auto showcase-text">
+          <h2>{{ word }}</h2>
+		  <h6 class="text-muted">{{ part_of_speech }}</h6>
+		  <p class="lead mb-4">{{ meaning }}</p>
+		  
+		  <table class="table table-striped">
+		  <thead>
+		  <tr>
+		    <th scope="col" class="text-truncate">Morpheme</th>
+		    <th scope="col" class="text-truncate">Meaning</th>
+		  </tr>
+		  </thead>
+		  <tbody>
+		  {% for item in l %}
+			<tr>
+			  <td class="lead">{{ item[0] }}</td>
+			  <td class="lead">{{ item[1] }}</td>
+			</tr>
+		  {% endfor %}
+		  </tbody>
+		  </table>
+		
+        </div>
+		
+      </div>
+    </div>
+  </section>
+  
+  <!-- Bootstrap core JavaScript -->
+  <script src="{{url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+  <script src="{{url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="{{url_for('static', filename='js/coming-soon.min.js')}}"></script>
+
+</body>
+
+</html>
